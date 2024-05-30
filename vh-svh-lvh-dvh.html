@@ -1,0 +1,95 @@
+<!--
+see the below page in mobile
+so i think we should use svh for the hero pages instead of vh 
+because most of the browsers consider vh as lvh and it is not good 
+because user needs to scroll down to see the full hero page but hero page should be visible 
+without scrolling. 
+
+so we can do that by explicitly setting 100svh instead of 100vh or if we want dynamic 
+we can use 100dvh 
+
+-->
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    *{
+      margin: 0;
+      padding: 0;
+    }
+    body{
+      margin: 0;
+      padding: 0;
+    }
+    .container{
+      width: 100%;
+      display: flex;
+      gap:10px;
+      height: 100lvh;
+	  justify-content:center;
+    }
+
+    .box{
+      width: 40px;
+      background-color: blue;
+	  display: flex;
+	  justify-content: center;
+	  align-items: center;
+	  
+    }
+
+    .vh{
+      height: 100vh;
+      background-color: lightblue;
+    }
+
+    .dvh{
+      height: 100dvh;
+      background-color: lightcoral;
+    }
+    
+    .lvh{
+      height: 100lvh;
+      background-color: lightgreen;
+    }
+
+    .svh{
+      height: 100svh;
+      background-color: lightseagreen;
+    }
+    
+    .demo{
+      width: 100%;
+      height: 30px;
+      background-color: rgb(0, 184, 245);
+	  display:flex;
+	  justify-content:center;
+	  align-items:center;
+	  padding: 0.8rem;
+    }
+	
+	.scroll-txt{
+		align-self: center;
+	}
+	
+	
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="vh box"><p><h3>vh</h3></p></div>
+    <div class="lvh box"><p><h3>lvh</h3></p></div>
+    <div class="svh box"><p><h3>svh</h3></p></div>
+    <div class="dvh box"><p><h3>dvh</h3></p></div>
+	<div class="scroll-txt"><h3>Scroll Down &#8595;</h3></div>
+  </div>
+  <div class="demo">
+    <p>For best results, view the demo page on a <b>mobile device</b> to see the differences clearly.</p>
+  </div>
+</body>
+</html>
