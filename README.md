@@ -11,4 +11,4 @@ This repository hosts various demo pages created for different purposes, includi
 ## Pages Included
 - [Different units of Viewport height - vh, svh, lvh, dvh](https://sharadbarad.github.io/vh-svh-lvh-dvh.html)
 - [Using MutationObserver for DOM content protection](https://sharadbarad.github.io/DOM-protect/)
-- [Malicious Autofill](https://sharadbarad.github.io/Malicious-Autofill.html/)
+- [Malicious Autofill](https://sharadbarad.github.io/Malicious-Autofill.html)
